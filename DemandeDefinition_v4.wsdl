@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- édité avec XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) par Ludovic Bobineau (ENGIE Information et Technologies) -->
+<wsdl:definitions xmlns:tns="http://gdfsuez/bef/calypso/demande/v4" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="http://gdfsuez.com/bef/calypso/demande" xmlns:ns1="http://gdfsuez.com/bef/calypso/personne" xmlns:ns2="http://gdfsuez.com/bef/chp/pivot" name="DemandeDefinition_v4" targetNamespace="http://gdfsuez/bef/calypso/demande/v4">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://gdfsuez.com/bef/calypso/demande" xmlns:ns2="http://gdfsuez.com/bef/chp/pivot" xmlns:tns="http://gdfsuez/bef/calypso/demande/v4" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://gdfsuez/bef/calypso/demande/v4">
+			<!-- <import namespace="http://gdfsuez.com/bef/chp/pivot" schemaLocation="SchemaPivot.xsd"/>
+			<import namespace="http://gdfsuez.com/bef/calypso/demande" schemaLocation="Demande_v4.xsd"/> -->
+			<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gdfsuez.com/bef/chp/pivot" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gdfsuez.com/bef/chp/pivot">
+				<annotation>
+					<appinfo>
+						<ArisID>f16739f6-c69f-11e2-578e-00265553288a</ArisID>
+					</appinfo>
+				</annotation>
+				<complexType name="paginationDt">
+					<sequence>
+						<element name="pageCount" type="tns:string3" minOccurs="0"/>
+						<element name="totalCount" type="tns:string3" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="listeValeursDt">
+					<sequence>
+						<element name="idValeur" type="string" minOccurs="0"/>
+						<element name="description" type="string" minOccurs="0"/>
+						<element name="categorie" type="string" minOccurs="0"/>
+						<element name="order" type="string" minOccurs="0"/>
+						<element name="libelleCourt" type="string" minOccurs="0"/>
+						<element name="libelleLong" type="string" minOccurs="0"/>
+						<element name="actif" type="string" minOccurs="0"/>
+						<element name="langue" type="string" minOccurs="0"/>
+						<element name="code" type="string" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="horodatageDt">
+					<sequence>
+						<element name="dateDerniereMAJ" type="dateTime" minOccurs="0"/>
+						<element name="flag" type="tns:listeValeursDt" minOccurs="0"/>
+						<element name="valeur" minOccurs="0">
+							<complexType>
+								<sequence>
+									<element name="valeurTexte" type="string" minOccurs="0"/>
+									<element name="valeurDate" type="dateTime" minOccurs="0"/>
+									<element name="valeurDecimal" type="double" minOccurs="0"/>
+									<element name="valeurListe" type="tns:listeValeursDt" minOccurs="0"/>
+									<element name="valeurBoolean" type="boolean" minOccurs="0"/>
+									<element name="valeurEntier" type="int" minOccurs="0"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+				<complexType name="refPersonneDt">
+					<sequence>
+						<element name="idPersonne" type="tns:string10"/>
+						<element name="rolePersonne" type="tns:listeValeursDt"/>
+						<element name="nom" type="tns:string40" nillable="true" minOccurs="0"/>
+						<element name="prenom" type="tns:string40" nillable="true" minOccurs="0"/>
+						<element name="entite" type="tns:listeValeursDt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="objetLieDt">
+					<sequence>
+						<element name="URL" type="tns:string255"/>
+						<element name="idObjetLie" type="tns:string50"/>
+						<element name="MotifObjetLie" type="tns:listeValeursDt"/>
+						<element name="typeObjetLie" type="tns:listeValeursDt"/>
+					</sequence>
+				</complexType>
+				<complexType name="retourTraitementMessageDt">
+					<sequence>
+						<element name="id" type="string" minOccurs="0"/>
+						<element name="source" type="string" minOccurs="0"/>
+						<element name="complement" type="string" minOccurs="0"/>
+						<element name="libelle" type="string" minOccurs="0"/>
+						<element name="affiche" type="string" minOccurs="0"/>
+						<element name="classe" type="string" minOccurs="0"/>
+						<element name="type" type="string" minOccurs="0"/>
+						<element name="code" type="string" minOccurs="0"/>
+						<element name="timestamp" type="dateTime" minOccurs="0"/>
+						<element name="causedBy" type="tns:retourTraitementMessageDt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="refPersonneMAJDt">
+					<sequence>
+						<element name="idPersonne" type="string"/>
+						<element name="rolePersonne" type="tns:listeValeursDt"/>
+					</sequence>
+				</complexType>
+				<complexType name="sortDt">
+					<sequence>
+						<element name="field" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="name" type="string"/>
+									<element name="desc" type="boolean"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+				<complexType name="searchControlRequestHeaderDt">
+					<sequence>
+						<element name="pagination" type="tns:searchControlRequestDt" minOccurs="0"/>
+						<element name="sort" type="tns:sortDt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="dateDt">
+					<sequence>
+						<element name="motifDate" type="tns:listeValeursDt" minOccurs="0"/>
+						<element name="valeurDate" type="dateTime" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="contextDt">
+					<sequence>
+						<element name="version" type="string"/>
+						<element name="systemPath">
+							<complexType>
+								<sequence>
+									<element name="system" maxOccurs="unbounded">
+										<complexType>
+											<sequence>
+												<element name="systemId" type="string"/>
+											</sequence>
+										</complexType>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="allowCache" type="boolean" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="retourTraitementMessagesDt">
+					<sequence>
+						<element name="retourTraitementMessage" type="tns:retourTraitementMessageDt" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+				<complexType name="intervalleDt">
+					<sequence>
+						<element name="Dates" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="valeurDate" type="dateTime"/>
+									<element name="operateur" type="tns:valeurOpEnum"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+				<complexType name="messageRetoursDt">
+					<sequence>
+						<element name="messageRetour" type="tns:retourTraitementMessageDt" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+				<complexType name="searchControlRequestDt">
+					<sequence>
+						<element name="offset" type="tns:string3"/>
+						<element name="from" type="tns:string3"/>
+					</sequence>
+				</complexType>
+				<complexType name="horodatageSimpleDt">
+					<sequence>
+						<element name="dateDerniereMAJ" type="dateTime" minOccurs="0"/>
+						<element name="flag" type="tns:listeValeursDt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+				<complexType name="refPersonneCreerDt">
+					<sequence>
+						<element name="idPersonne" type="string"/>
+						<element name="rolePersonne" type="tns:listeValeursDt"/>
+					</sequence>
+				</complexType>
+				<complexType name="listeValeursParticulieresDt">
+					<sequence>
+						<element name="libelleCourt" type="string" minOccurs="0"/>
+						<element name="code" type="string"/>
+					</sequence>
+				</complexType>
+				<simpleType name="string18">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="18"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string16">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="16"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="idMandatDt">
+					<restriction base="string">
+						<maxLength value="12"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string15">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="15"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string256">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string255">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="255"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string14">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="14"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string13">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="13"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string12">
+					<restriction base="string">
+						<maxLength value="12"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string11">
+					<restriction base="string">
+						<maxLength value="11"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string10">
+					<restriction base="string">
+						<maxLength value="10"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string251">
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="251"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string9">
+					<restriction base="string">
+						<maxLength value="9"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string40">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="40"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string8">
+					<restriction base="string"/>
+				</simpleType>
+				<simpleType name="string128">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="128"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string7">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="7"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string70">
+					<restriction base="string">
+						<maxLength value="70"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string6">
+					<restriction base="string">
+						<maxLength value="6"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string5">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="5"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string4">
+					<restriction base="string">
+						<maxLength value="4"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string3">
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="3"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string2">
+					<restriction base="string">
+						<maxLength value="2"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string1">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string120">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="120"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="valeurOpEnum">
+					<restriction base="string">
+						<enumeration value="LT"/>
+						<enumeration value="GT"/>
+						<enumeration value="LE"/>
+						<enumeration value="GE"/>
+						<enumeration value="EQ"/>
+						<enumeration value="NE"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="idPersonneDt">
+					<restriction base="string">
+						<maxLength value="10"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string35">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="35"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string34">
+					<restriction base="string">
+						<maxLength value="34"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string241">
+					<restriction base="string"/>
+				</simpleType>
+				<simpleType name="string32">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="32"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string64">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="64"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string31">
+					<restriction base="string">
+						<maxLength value="31"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string30">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string60">
+					<restriction base="string">
+						<maxLength value="60"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string2047">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="2047"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="float40">
+					<restriction base="float"/>
+				</simpleType>
+				<simpleType name="string25">
+					<restriction base="string">
+						<maxLength value="25"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string24">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="24"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string1024">
+					<restriction base="string">
+						<maxLength value="1024"/>
+						<minLength value="0"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="double13">
+					<restriction base="double"/>
+				</simpleType>
+				<simpleType name="string20">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string50">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string80">
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="80"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string132">
+					<restriction base="string">
+						<minLength value="1"/>
+						<maxLength value="132"/>
+					</restriction>
+				</simpleType>
+				<simpleType name="string100">
+					<restriction base="string">
+						<maxLength value="100"/>
+						<minLength value="1"/>
+					</restriction>
+				</simpleType>
+			</schema>
+			<element name="majDemandeResponse">
+				<complexType>
+					<sequence>
+						<element name="majDemandeResponseOutput" minOccurs="0"/>
+						<element name="messageRetours" type="ns2:retourTraitementMessagesDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="creerDemande">
+				<complexType>
+					<sequence>
+						<element name="creerDemandeInput" type="tns:creerDemandeInputDt"/>
+						<element name="context" type="ns2:contextDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="creerDemandeResponse">
+				<complexType>
+					<sequence>
+						<element name="creerDemandeResponseOutput" type="tns:creerDemandeOutputDt" minOccurs="0"/>
+						<element name="messageRetours" type="ns2:retourTraitementMessagesDt" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="majDemande">
+				<complexType>
+					<sequence>
+						<element name="majDemandeInput" type="tns:majDemandeInputDt"/>
+						<element name="context" type="ns2:contextDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="lireDemandeResponse">
+				<complexType>
+					<sequence>
+						<element name="lireDemandeResponseOutput" type="tns:lireDemandeOutputDt" minOccurs="0"/>
+						<element name="messageRetours" type="ns2:retourTraitementMessagesDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="rechercherDemande">
+				<complexType>
+					<sequence>
+						<element name="rechercherDemandeInput" type="tns:rechercherDemandeInputDt"/>
+						<element name="context" type="ns2:contextDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="lireDemande">
+				<complexType>
+					<sequence>
+						<element name="lireDemandeInput" type="tns:lireDemandeInputDt"/>
+						<element name="context" type="ns2:contextDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="rechercherDemandeResponse">
+				<complexType>
+					<sequence>
+						<element name="rechercherDemandeResponseOutput" type="tns:rechercherDemandeOutputDt" minOccurs="0"/>
+						<element name="messageRetours" type="ns2:retourTraitementMessagesDt"/>
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="lireDemandeOutputDt">
+				<sequence>
+					<element name="listeDemande" minOccurs="0" maxOccurs="unbounded">
+						<complexType>
+							<sequence>
+								<element name="idDemande" minOccurs="1">
+									<simpleType>
+										<restriction base="string">
+											<maxLength value="10"/>
+											<minLength value="0"/>
+										</restriction>
+									</simpleType>
+								</element>
+								<element name="prioriteDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="complexiteDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="texteLibreDemande" type="string" minOccurs="0"/>
+								<element name="typeDemande" type="ns2:listeValeursDt"/>
+								<element name="codeFormulaireExterne" type="ns2:string100" minOccurs="0"/>
+								<element name="resultatDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="refExterne" type="ns2:string20" minOccurs="0"/>
+								<element name="dateCreation" type="dateTime" minOccurs="0"/>
+								<element name="canalDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="choixSVI" type="ns2:string100" minOccurs="0"/>
+								<element name="dateDebut" type="dateTime" minOccurs="0"/>
+								<element name="dateFin" type="dateTime" minOccurs="0"/>
+								<element name="motifDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="dateModification" type="dateTime" minOccurs="0"/>
+								<element name="dateEffetCPV" type="dateTime" minOccurs="0"/>
+								<element name="codeCampagne" type="ns2:string9" minOccurs="0"/>
+								<element name="statutDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="codeTSA" type="ns2:string40" minOccurs="0"/>
+								<element name="codePostal" type="ns2:string10" minOccurs="0"/>
+								<element name="objetLie" type="ns2:objetLieDt" minOccurs="0" maxOccurs="unbounded"/>
+								<element name="refPersonne" type="ns2:refPersonneDt" minOccurs="1" maxOccurs="unbounded"/>
+								<element name="listeDate" type="ns2:dateDt" minOccurs="0" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</complexType>
+			<complexType name="rechercherDemandeInputDt">
+				<sequence>
+					<element name="idPersonne" type="ns2:string10" minOccurs="0" maxOccurs="1"/>
+					<element name="typeDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="statutDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="motifDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="dateCreationDemandeDu" type="dateTime" minOccurs="0" maxOccurs="1"/>
+					<element name="dateCreationDemandeAu" type="dateTime" minOccurs="0" maxOccurs="1"/>
+					<element name="searchControlRequest" type="ns2:searchControlRequestHeaderDt" minOccurs="0" maxOccurs="1"/>
+				</sequence>
+			</complexType>
+			<complexType name="lireDemandeInputDt">
+				<sequence>
+					<element maxOccurs="1" minOccurs="1" name="listeIdDemande">
+						<complexType>
+							<sequence>
+								<element name="idDemande" type="ns2:string10" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</complexType>
+			<complexType name="demandeMajDt">
+				<sequence>
+					<element name="idDemande" type="ns2:string10" minOccurs="1" maxOccurs="1"/>
+					<element name="typeDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="statutDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="motifDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="texteLibreDemande" type="ns2:string132" minOccurs="0" maxOccurs="1"/>
+					<element name="complexiteDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="refPersonneMAJ" type="ns2:refPersonneMAJDt" minOccurs="1" maxOccurs="1"/>
+					<element name="prioriteDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="resultatDemande" type="ns2:listeValeursDt" minOccurs="0" maxOccurs="1"/>
+					<element name="listeDate" type="ns2:dateDt" minOccurs="0" maxOccurs="1"/>
+					<element name="listeObjetsLies" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="objetLie" type="ns2:objetLieDt" minOccurs="1"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="idSAP" type="string" minOccurs="0" maxOccurs="1"/>
+				</sequence>
+			</complexType>
+			<complexType name="majDemandeInputDt">
+				<sequence>
+					<element name="demande" type="tns:demandeMajDt"/>
+				</sequence>
+			</complexType>
+			<complexType name="rechercherDemandeOutputDt">
+				<sequence>
+					<element name="idPersonne" type="ns2:string10" maxOccurs="unbounded"/>
+					<element name="listeDemande" maxOccurs="unbounded">
+						<complexType>
+							<sequence>
+								<element name="idDemande" type="ns2:string10" minOccurs="1"/>
+								<element name="dateCreation" type="ns2:dateDt" minOccurs="0"/>
+								<element name="statutDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="typeDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+								<element name="motifDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="searchControlResponse" type="ns2:paginationDt"/>
+				</sequence>
+			</complexType>
+			<complexType name="majDemandeOutputDt">
+				<sequence>
+					<element name="demande" type="ns1:DemandeAbstract"/>
+				</sequence>
+			</complexType>
+			<complexType name="demandeCreerDt">
+				<sequence>
+					<element name="typeDemande" type="ns2:listeValeursDt"/>
+					<element name="statutDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+					<element name="motifDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+					<element name="texteLibreDemande" type="string" minOccurs="0"/>
+					<element name="choixSVI" type="ns2:string100" minOccurs="0"/>
+					<element name="codeFormulaireExterne" type="ns2:string100" minOccurs="0"/>
+					<element name="refExterne" type="ns2:string20" minOccurs="0"/>
+					<element name="complexiteDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+					<element name="refPersonneCreer" type="ns2:refPersonneCreerDt" maxOccurs="unbounded"/>
+					<element name="codePostal" type="ns2:string10" minOccurs="0"/>
+					<element name="codeTSA" type="ns2:string40" minOccurs="0"/>
+					<element name="prioriteDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+					<element name="resultatDemande" type="ns2:listeValeursDt" minOccurs="0"/>
+					<element name="planificationDemandee" type="boolean"/>
+					<element name="codeCampagne" type="ns2:string9" minOccurs="0"/>
+					<element name="dateEffetCPV" type="dateTime" minOccurs="0"/>
+					<element name="dateDebut" type="dateTime" minOccurs="0"/>
+					<element name="dateFin" type="dateTime" minOccurs="0"/>
+					<element name="codeEnseigne" type="ns2:string40" minOccurs="0"/>
+					<element name="idVendeur" type="ns2:string100" minOccurs="0"/>
+					<element name="codeLocalite" type="ns2:string40" minOccurs="0"/>
+					<element name="codePromo" type="ns2:string40" minOccurs="0"/>
+				</sequence>
+			</complexType>
+			<complexType name="creerDemandeInputDt">
+				<sequence>
+					<element name="demande" type="tns:demandeCreerDt"/>
+				</sequence>
+			</complexType>
+			<complexType name="creerDemandeOutputDt">
+				<sequence>
+					<element name="creerDemandeResponseOutput" type="ns1:DemandeAbstract"/>
+				</sequence>
+			</complexType>
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="MajDemandeOutput">
+		<wsdl:part name="MajDemandeOutputParameter" element="tns:majDemandeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="RechercherDemandeOutput">
+		<wsdl:part name="RechercherDemandeOutputParameter" element="tns:rechercherDemandeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="MajDemandeInput">
+		<wsdl:part name="MajDemandeInputParameter" element="tns:majDemande">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="LireDemandeOutput">
+		<wsdl:part name="LireDemandeOutputParameter" element="tns:lireDemandeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="RechercherDemandeInput">
+		<wsdl:part name="RechercherDemandeInputParameter" element="tns:rechercherDemande">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="LireDemandeInput">
+		<wsdl:part name="LireDemandeInputParameter" element="tns:lireDemande">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CreerDemandeOutput">
+		<wsdl:part name="CreerDemandeOutputParameter" element="tns:creerDemandeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CreerDemandeInput">
+		<wsdl:part name="CreerDemandeInputParameter" element="tns:creerDemande">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="DemandePortType">
+		<wsdl:operation name="CreerDemande">
+			<wsdl:input name="CreerDemandeRequest" message="tns:CreerDemandeInput">
+    </wsdl:input>
+			<wsdl:output name="CreerDemandeResponse" message="tns:CreerDemandeOutput">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="LireDemande">
+			<wsdl:input name="LireDemandeRequest" message="tns:LireDemandeInput">
+    </wsdl:input>
+			<wsdl:output name="LireDemandeResponse" message="tns:LireDemandeOutput">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="MajDemande">
+			<wsdl:input name="MajDemandeRequest" message="tns:MajDemandeInput">
+    </wsdl:input>
+			<wsdl:output name="MajDemandeResponse" message="tns:MajDemandeOutput">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RechercherDemande">
+			<wsdl:input name="RechercherDemandeRequest" message="tns:RechercherDemandeInput">
+    </wsdl:input>
+			<wsdl:output name="RechercherDemandeResponse" message="tns:RechercherDemandeOutput">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DemandeBinding" type="tns:DemandePortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="CreerDemande">
+			<soap:operation soapAction="tns:CreerDemande"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="MajDemande">
+			<soap:operation soapAction="tns:MajDemande"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="LireDemande">
+			<soap:operation soapAction="tns:LireDemande"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="RechercherDemande">
+			<soap:operation soapAction="tns:RechercherDemande"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Demande">
+		<wsdl:port name="Dependency" binding="tns:DemandeBinding">
+			<soap:address location="http://localhost:8080/services/Demande/v4"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

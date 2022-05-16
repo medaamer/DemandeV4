@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿SMAIL (CGI) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gdfsuez.com/bef/calypso/personne" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gdfsuez.com/bef/calypso/personne">
+	<annotation>
+		<appinfo>
+			<ArisID>aeab6483-bb60-11e4-593e-00265553288a</ArisID>
+		</appinfo>
+	</annotation>
+	<complexType name="PersonneAbstract">
+		<sequence>
+			<element name="idPersonne" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<minLength value="0"/>
+						<maxLength value="10"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="PersonneRoot">
+		<complexContent>
+			<extension base="tns:PersonneAbstract"/>
+		</complexContent>
+	</complexType>
+</schema>

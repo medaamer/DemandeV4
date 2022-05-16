@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- édité avec XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) par Ludovic Bobineau (ENGIE Information et Technologies) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gdfsuez.com/bef/calypso/demande" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gdfsuez.com/bef/calypso/demande">
+	<complexType name="DemandeRoot">
+		<complexContent>
+			<extension base="tns:DemandeAbstract"/>
+		</complexContent>
+	</complexType>
+	<complexType name="DemandeAbstract">
+		<sequence>
+			<element name="idDemande" minOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="10"/>
+						<minLength value="0"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

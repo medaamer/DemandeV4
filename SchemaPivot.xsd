@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- édité avec XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) par Ludovic Bobineau (ENGIE Information et Technologies) -->
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿SMAIL (CGI) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gdfsuez.com/bef/chp/pivot" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://gdfsuez.com/bef/chp/pivot">
+	<annotation>
+		<appinfo>
+			<ArisID>f16739f6-c69f-11e2-578e-00265553288a</ArisID>
+		</appinfo>
+	</annotation>
+	<complexType name="paginationDt">
+		<sequence>
+			<element name="pageCount" type="tns:string3" minOccurs="0"/>
+			<element name="totalCount" type="tns:string3" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="listeValeursDt">
+		<sequence>
+			<element name="idValeur" type="string" minOccurs="0"/>
+			<element name="description" type="string" minOccurs="0"/>
+			<element name="categorie" type="string" minOccurs="0"/>
+			<element name="order" type="string" minOccurs="0"/>
+			<element name="libelleCourt" type="string" minOccurs="0"/>
+			<element name="libelleLong" type="string" minOccurs="0"/>
+			<element name="actif" type="string" minOccurs="0"/>
+			<element name="langue" type="string" minOccurs="0"/>
+			<element name="code" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="horodatageDt">
+		<sequence>
+			<element name="dateDerniereMAJ" type="dateTime" minOccurs="0"/>
+			<element name="flag" type="tns:listeValeursDt" minOccurs="0"/>
+			<element name="valeur" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="valeurTexte" type="string" minOccurs="0"/>
+						<element name="valeurDate" type="dateTime" minOccurs="0"/>
+						<element name="valeurDecimal" type="double" minOccurs="0"/>
+						<element name="valeurListe" type="tns:listeValeursDt" minOccurs="0"/>
+						<element name="valeurBoolean" type="boolean" minOccurs="0"/>
+						<element name="valeurEntier" type="int" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="refPersonneDt">
+		<sequence>
+			<element name="idPersonne" type="tns:string10"/>
+			<element name="rolePersonne" type="tns:listeValeursDt"/>
+			<element name="nom" type="tns:string40" nillable="true" minOccurs="0"/>
+			<element name="prenom" type="tns:string40" nillable="true" minOccurs="0"/>
+			<element name="entite" type="tns:listeValeursDt" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="objetLieDt">
+		<sequence>
+			<element name="URL" type="tns:string255"/>
+			<element name="idObjetLie" type="tns:string50"/>
+			<element name="MotifObjetLie" type="tns:listeValeursDt"/>
+			<element name="typeObjetLie" type="tns:listeValeursDt"/>
+		</sequence>
+	</complexType>
+	<complexType name="retourTraitementMessageDt">
+		<sequence>
+			<element name="id" type="string" minOccurs="0"/>
+			<element name="source" type="string" minOccurs="0"/>
+			<element name="complement" type="string" minOccurs="0"/>
+			<element name="libelle" type="string" minOccurs="0"/>
+			<element name="affiche" type="string" minOccurs="0"/>
+			<element name="classe" type="string" minOccurs="0"/>
+			<element name="type" type="string" minOccurs="0"/>
+			<element name="code" type="string" minOccurs="0"/>
+			<element name="timestamp" type="dateTime" minOccurs="0"/>
+			<element name="causedBy" type="tns:retourTraitementMessageDt" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="refPersonneMAJDt">
+		<sequence>
+			<element name="idPersonne" type="string"/>
+			<element name="rolePersonne" type="tns:listeValeursDt"/>
+		</sequence>
+	</complexType>
+	<complexType name="sortDt">
+		<sequence>
+			<element name="field" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="name" type="string"/>
+						<element name="desc" type="boolean"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="searchControlRequestHeaderDt">
+		<sequence>
+			<element name="pagination" type="tns:searchControlRequestDt" minOccurs="0"/>
+			<element name="sort" type="tns:sortDt" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="dateDt">
+		<sequence>
+			<element name="motifDate" type="tns:listeValeursDt" minOccurs="0"/>
+			<element name="valeurDate" type="dateTime" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="contextDt">
+		<sequence>
+			<element name="version" type="string"/>
+			<element name="systemPath">
+				<complexType>
+					<sequence>
+						<element name="system" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="systemId" type="string"/>
+								</sequence>
+							</complexType>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="allowCache" type="boolean" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="retourTraitementMessagesDt">
+		<sequence>
+			<element name="retourTraitementMessage" type="tns:retourTraitementMessageDt" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="intervalleDt">
+		<sequence>
+			<element name="Dates" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="valeurDate" type="dateTime"/>
+						<element name="operateur" type="tns:valeurOpEnum"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="messageRetoursDt">
+		<sequence>
+			<element name="messageRetour" type="tns:retourTraitementMessageDt" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="searchControlRequestDt">
+		<sequence>
+			<element name="offset" type="tns:string3"/>
+			<element name="from" type="tns:string3"/>
+		</sequence>
+	</complexType>
+	<complexType name="horodatageSimpleDt">
+		<sequence>
+			<element name="dateDerniereMAJ" type="dateTime" minOccurs="0"/>
+			<element name="flag" type="tns:listeValeursDt" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="refPersonneCreerDt">
+		<sequence>
+			<element name="idPersonne" type="string"/>
+			<element name="rolePersonne" type="tns:listeValeursDt"/>
+		</sequence>
+	</complexType>
+	<complexType name="listeValeursParticulieresDt">
+		<sequence>
+			<element name="libelleCourt" type="string" minOccurs="0"/>
+			<element name="code" type="string"/>
+		</sequence>
+	</complexType>
+	<simpleType name="string18">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="18"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string16">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="16"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="idMandatDt">
+		<restriction base="string">
+			<maxLength value="12"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string15">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string256">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="256"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string255">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="255"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string14">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="14"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string13">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="13"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string12">
+		<restriction base="string">
+			<maxLength value="12"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string11">
+		<restriction base="string">
+			<maxLength value="11"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string10">
+		<restriction base="string">
+			<maxLength value="10"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string251">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="251"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string9">
+		<restriction base="string">
+			<maxLength value="9"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string40">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string8">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="string128">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="128"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string7">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string70">
+		<restriction base="string">
+			<maxLength value="70"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string6">
+		<restriction base="string">
+			<maxLength value="6"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string5">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string4">
+		<restriction base="string">
+			<maxLength value="4"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string3">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string2">
+		<restriction base="string">
+			<maxLength value="2"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string120">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="120"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="valeurOpEnum">
+		<restriction base="string">
+			<enumeration value="LT"/>
+			<enumeration value="GT"/>
+			<enumeration value="LE"/>
+			<enumeration value="GE"/>
+			<enumeration value="EQ"/>
+			<enumeration value="NE"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="idPersonneDt">
+		<restriction base="string">
+			<maxLength value="10"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string35">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="35"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string34">
+		<restriction base="string">
+			<maxLength value="34"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string241">
+		<restriction base="string"/>
+	</simpleType>
+	<simpleType name="string32">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="32"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string64">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="64"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string31">
+		<restriction base="string">
+			<maxLength value="31"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string30">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string60">
+		<restriction base="string">
+			<maxLength value="60"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string2047">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="2047"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="float40">
+		<restriction base="float"/>
+	</simpleType>
+	<simpleType name="string25">
+		<restriction base="string">
+			<maxLength value="25"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string24">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="24"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string1024">
+		<restriction base="string">
+			<maxLength value="1024"/>
+			<minLength value="0"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="double13">
+		<restriction base="double"/>
+	</simpleType>
+	<simpleType name="string20">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string50">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="50"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string80">
+		<restriction base="string">
+			<minLength value="0"/>
+			<maxLength value="80"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string132">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="132"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="string100">
+		<restriction base="string">
+			<maxLength value="100"/>
+			<minLength value="1"/>
+		</restriction>
+	</simpleType>
+</schema>

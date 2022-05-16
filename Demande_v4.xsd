@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- édité avec XMLSpy v2017 rel. 3 sp1 (x64) (http://www.altova.com) par Ludovic Bobineau (ENGIE Information et Technologies) -->
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by ﻿SMAIL (CGI) -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://gdfsuez.com/bef/chp/pivot" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://gdfsuez.com/bef/calypso/demande" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns6="http://gdfsuez.com/bef/calypso/personne" xmlns:ns2="http://gdfsuez.com/bef/calypso/dossierAffaire" targetNamespace="http://gdfsuez.com/bef/calypso/demande">
+	<import namespace="http://gdfsuez.com/bef/calypso/personne" schemaLocation="PersonneAbstract.xsd"/>
+	<import namespace="http://gdfsuez.com/bef/chp/pivot" schemaLocation="SchemaPivot.xsd"/>
+	<include schemaLocation="DemandeAbstract.xsd"/>
+	<element name="Demande">
+		<complexType>
+			<complexContent>
+				<extension base="tns:DemandeAbstract">
+					<sequence>
+						<element name="prioriteDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="complexiteDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="texteLibreDemande" type="string" minOccurs="0"/>
+						<element name="typeDemande" type="ns1:listeValeursDt"/>
+						<element name="codeFormulaireExterne" type="ns1:string100" minOccurs="0"/>
+						<element name="resultatDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="refExterne" type="ns1:string20" minOccurs="0"/>
+						<element name="dateCreation" type="dateTime" minOccurs="0"/>
+						<element name="canalDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="choixSVI" type="ns1:string100" minOccurs="0"/>
+						<element name="dateDebut" type="dateTime" minOccurs="0"/>
+						<element name="dateFin" type="dateTime" minOccurs="0"/>
+						<element name="motifDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="dateModification" type="dateTime" minOccurs="0"/>
+						<element name="dateEffetCPV" type="dateTime" minOccurs="0"/>
+						<element name="codeCampagne" type="ns1:string9" minOccurs="0"/>
+						<element name="statutDemande" type="ns1:listeValeursDt" minOccurs="0"/>
+						<element name="codeTSA" type="ns1:string40" minOccurs="0"/>
+						<element name="codePostal" type="ns1:string10" minOccurs="0"/>
+						<element name="objetLie" type="ns1:objetLieDt" minOccurs="0" maxOccurs="unbounded"/>
+						<element name="refPersonne" type="ns1:refPersonneDt" minOccurs="1" maxOccurs="unbounded"/>
+						<element name="listeDate" type="ns1:dateDt" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+</schema>
